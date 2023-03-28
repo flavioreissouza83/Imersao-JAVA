@@ -26,23 +26,19 @@ public class App {
 
         // exibir e manipular dados
         for (Map<String, String> movie : movieList) {
-            System.out.println("\u001b[36m" + movie.get("title") + "\u001b[0m");
-            System.out.println(movie.get("image"));
-            System.out.println("\u001b[30m \u001b[41m Classificação " + movie.get("imDbRating") + "\u001b[0m");
-            printRating(movie.get("imDbRating"));
-            System.out.println();
+            System.out.println("\u001b[36m Título: " + movie.get("title") + "\u001b[m");
+            System.out.println("\u001b[36m Poster: " + movie.get("image") + "\u001b[m");
+            System.out.println("\u001b[30m \u001b[41m Classificação " + movie.get("imDbRating") + "\u001b[m");
+            double rate = Math.round(Double.parseDouble(movie.get("imDbRating")));
+            if (rate <= 7) {
+                System.out.print("\uD83D\uDC4E"); // emoji polegar para baixo
+            } else {
+                int numberStar = (int) rate;
+                for (int n = 1; n <= numberStar; n++) {
+                    System.out.print("\uD83C\uDF1F"); // emoji estrela
+                }
+            }
+            System.out.println("\n");
         }
     }
-    public static void printRating(String rating) {
-        int nota = (int) Math.round(Double.parseDouble(rating));
-        String cor = "\u001b[33m"; // código ANSI para a cor amarela
-        String reset = "\u001b[0m"; // código ANSI para resetar a cor
-
-        for (int i = 0; i < nota; i++) {
-            System.out.print(cor + "\uD83C\uDF1F" + reset);
-        }
-        System.out.println();
-    }
-
-
 }
